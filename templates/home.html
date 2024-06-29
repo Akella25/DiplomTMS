@@ -17,7 +17,17 @@
         Регистрация
     </botum>
     </a>
-    
+    <a href="{% url 'log_in'%}">
+        <botum>
+        login
+    </botum>
+    </a>
+    <a href="{% url 'log_out'%}">
+        <botum>
+        logout
+    </botum>
+    </a>
+
 </div>
 <div>
     {% for hotel in hotels %}
@@ -27,6 +37,7 @@
 {% endfor %}
 </div>
 
+<h1>{{ request.user.username }}</h1>
 
 </body>
 </html>
