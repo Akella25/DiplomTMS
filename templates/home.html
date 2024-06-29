@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+</head>
+<body>
+<div>
+    <a href="{% url 'home'%}">
+            <botum> 
+            Главнвя
+        </botum>
+    </a>
+    
+     <a href="{% url 'registr'%}">
+        <botum>
+        Регистрация
+    </botum>
+    </a>
+    
+</div>
+<div>
+    {% for hotel in hotels %}
+    {{ hotel }}<br>
+    
+    
+{% endfor %}
+</div>
+
+
+</body>
+</html>
