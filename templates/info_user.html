@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>info_user</title>
+    <style>
+        /* Здесь могут быть ваши стили */
+    </style>
+</head>
+<body>
+
+{{ request.user.username }}<br>
+{% if hotels %}
+    {% for booking, hotel in hotels %}
+        
+        {{ hotel.name }}<br>
+        {{ booking.date_add }}<br>
+        
+        {{ booking.check_in_date }}<br>
+        {{ booking.eviction_date }}<br>
+        {{ booking.room_pay.number }}<br>
+        {{ booking.room_pay.room_price }}<br>
+        {{ booking.room_pay.room_type }}<br><br>
+        <a href="{% url 'del_booking' booking.id %}">
+            <button type="submit" value="Снять бронь" >Снять бронь </button></a><br><br>
+    {% endfor %}
+    
+{% endif %}
+
+</body>
+</html>

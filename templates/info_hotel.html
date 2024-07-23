@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa; /* Цвет основного фона */
+            margin: 0;
+            padding: 20px; /* Добавим отступы для контента */
+            position: relative; /* Относительное позиционирование для абсолютного позиционирования кнопки */
+        }
+        
+        h1 {
+            font-size: 32px; /* Увеличим размер заголовка */
+            color: #007bff; /* Цвет заголовка */
+            margin-bottom: 20px; /* Отступ снизу */
+        }
+        
+        img {
+            max-width: 100%; /* Сделаем изображение адаптивным по ширине */
+            height: auto; /* Автоматическая высота */
+            border-radius: 5px; /* Закруглим углы изображения */
+            margin-bottom: 10px; /* Отступ снизу */
+        }
+        
+        p {
+            font-size: 18px; /* Размер текста */
+            color: #555; /* Цвет текста */
+            line-height: 1.6; /* Межстрочный интервал */
+            margin-bottom: 10px; /* Отступ снизу */
+            padding: 8px; /* Поля вокруг текста */
+            background-color: #f0f0f0; /* Фоновый цвет */
+            border-radius: 5px; /* Закругленные углы */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Тень */
+        }
+        
+        .top-right {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .button {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007bff; /* Цвет кнопок */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<a href="{% url 'home' %}" class="button top-right">Главная</a>
+
+<h1>{{ hotel.name }}</h1>
+
+                <img src="{{ hotel.picturess.url }}" alt="no image">
+            
+<br>
+                <p>Звезды: {{ hotel.stars }}</p>
+                <p>Город: {{ hotel.city }}</p>
+                <p>Адрес: {{ hotel.address }}</p>
+                {% if hotel.swimming_pool %}
+                    <p>Наличие бассейна: Есть </p>
+                    
+                {% else %}    
+                    <p>Наличие бассейна: Нет </p>
+                {% endif %}
+
+<a href="{% url 'booking' hotel.id %}"><button type="submit" value="Заказать" >Заказать </button></a>
+
+</body>
+</html>

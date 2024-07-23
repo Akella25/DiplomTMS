@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 30px;
+    margin-bottom: 40px;
+}
+
+.search-form {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.search-form input[type="text"] {
+    flex-grow: 1;
+    padding: 4px;
+    margin-right: 55px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #f8f8f8;
+}
+
+.search-form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 20px 20px; /* Уменьшенный размер кнопки */
+    font-size: 20px; /* Уменьшенный размер текста */
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.hotel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 25px;
+}
+
+.hotel-info {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    background-color: #f8f8f8;
+    transition: box-shadow 0.3s ease;
+}
+
+.hotel-info:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.hotel-link img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.hotel-details {
+    font-size: 16px;
+    color: #6c757d;
+}
+
+.hotel-name {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #007bff;
+}
+
+.button-home {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.button-home:hover {
+    background-color: #0056b3;
+}
+</style>
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <form method="post" action="{% url 'search' %}" class="search-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Поиск">
+    </form>
+    
+    <a href="{% url 'home' %}" class="button-home">Главная</a>
+</div>
+
+<div class="container">
+    <div class="hotel-grid">
+        {% for hotel in hotels %}
+        <div class="hotel-info">
+            <a href="{% url 'info' hotel.id %}" class="hotel-link">
+                <img src="{{ hotel.picturess.url }}" alt="no image">
+            </a>
+            <div class="hotel-details">
+                <h2 class="hotel-name">{{ hotel.name }}</h2>
+                <p>Звезды: {{ hotel.stars }}</p>
+                <p>Город: {{ hotel.city }}</p>
+                <p>Адрес: {{ hotel.address }}</p>
+                {% if hotel.swimming_pool %}
+                    <p>Наличие бассейна: Есть </p>
+                    
+                {% else %}    
+                    <p>Наличие бассейна: Нет </p>
+                {% endif %}
+                
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>
+

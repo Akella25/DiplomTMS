@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
 from django.contrib.auth.models import User
+from hotel.models import Booking, Room
 
 
 class CreateNewUserForm(UserCreationForm):
@@ -19,3 +20,10 @@ class LoginAuthenticationForm(AuthenticationForm):
         model = User
         fields = ('username', 'password')
 
+
+class BookRoomForm(forms.ModelForm):
+
+    room_pay = forms.ModelChoiceField(queryset=Room.objects.all())
+    class Meta:
+        model = Booking
+        fields = ('check_in_date', 'eviction_date', 'room_pay')

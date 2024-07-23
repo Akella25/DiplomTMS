@@ -3,13 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa; /* Цвет основного фона */
+            margin: 0;
+            padding: 20px; /* Добавим отступы для контента */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Сделаем форму центрированной по вертикали на всю высоту экрана */
+        }
+        
+        form {
+            background-color: #ffffff; /* Цвет фона формы */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Тень */
+            width: 300px; /* Ширина формы */
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 20px); /* Ширина инпутов с учетом padding */
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        input[type="submit"] {
+            background-color: #007bff; /* Цвет кнопки */
+            color: #ffffff; /* Цвет текста на кнопке */
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Измененный цвет кнопки при наведении */
+        }
+        
+        h1 {
+            text-align: center;
+            color: #007bff; /* Цвет заголовка */
+        }
+    </style>
 </head>
 <body>
- <form method="post" action="{% url 'registr' %}">
-      {% csrf_token %}
-     {{ form }}
-     
-     <input type="submit" value="регистрация">
- </form>
+
+<div>
+    <h1>Регистрация на сайте</h1>
+    <form method="post" action="{% url 'registr' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Регистрация">
+    </form>
+</div>
+
 </body>
 </html>

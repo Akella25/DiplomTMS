@@ -3,41 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <title>Home page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa; /* Цвет основного фона */
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            background-color: #007bff; /* Цвет header */
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .button {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007bff; /* Цвет кнопок */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .button:last-child {
+            margin-right: 0;
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff; /* Цвет контентной области */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hotel-info {
+            position: relative;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+        }
+        
+        .hotel-info img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            display: block;
+        }
+        
+        .hotel-name {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .hotel-stars {
+            font-size: 18px; /* Увеличиваем размер звезд */
+            color: #333; /* Цвет звезд */
+            font-weight: bold; /* Жирный шрифт */
+        }
+        
+        .hotel-city {
+            font-size: 18px; /* Увеличиваем размер города */
+            color: #333; /* Цвет города */
+            font-style: italic; /* Курсив */
+        }
+        
+        .username {
+            color: #333;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-<div>
-    <a href="{% url 'home'%}">
-            <botum> 
-            Главнвя
-        </botum>
-    </a>
-    
-     <a href="{% url 'registr'%}">
-        <botum>
-        Регистрация
-    </botum>
-    </a>
-    <a href="{% url 'log_in'%}">
-        <botum>
-        login
-    </botum>
-    </a>
-    <a href="{% url 'log_out'%}">
-        <botum>
-        logout
-    </botum>
-    </a>
-
-</div>
-<div>
-    {% for hotel in hotels %}
-    {{ hotel }}<br>
-    
-    
-{% endfor %}
+<div class="header">
+    <div>
+        <a href="{% url 'home' %}" class="button">Главная</a>
+        <a href="{% url 'search' %}" class="button">Поиск отеля</a>
+    </div>
+    <div>
+        <a href="{% url 'info_user' %}"><span class="username">{{ request.user.username }}</span></a>
+        {% if not request.user.username %}
+        <a href="{% url 'registr' %}" class="button">Регистрация</a>
+        <a href="{% url 'log_in' %}" class="button">Login</a>
+        
+        {% else %}
+        <a href="{% url 'log_out' %}" class="button">Logout</a>
+        {% endif %}
+    </div>
 </div>
 
-<h1>{{ request.user.username }}</h1>
+<div class="content">
+    <div class="hotel-info">
+        <a href="{% url 'info' hotel.id %}" class="hotel-link">
+            <img src="{{ hotel.picturess.url }}" alt="no image">
+        </a>
+        <div class="hotel-details">
+            <h2 class="hotel-name">{{ hotel.name }}</h2>
+            <p class="hotel-stars">{{ hotel.stars }}</p>
+            <p class="hotel-city">{{ hotel.city }}</p>
+        </div>
+    </div>
+</div>
+
+
 
 </body>
 </html>
+
+
