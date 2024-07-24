@@ -23,7 +23,10 @@ class LoginAuthenticationForm(AuthenticationForm):
 
 class BookRoomForm(forms.ModelForm):
 
-    room_pay = forms.ModelChoiceField(queryset=Room.objects.all())
+    room_pay = forms.ModelChoiceField(queryset=Room.objects.all(), label='Номер комнаты')
+    check_in_date = forms.DateField(label='Дата заселения')
+    eviction_date = forms.DateField(label='Дата выселения')
+
     class Meta:
         model = Booking
         fields = ('check_in_date', 'eviction_date', 'room_pay')

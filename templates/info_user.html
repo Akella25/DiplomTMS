@@ -4,28 +4,106 @@
     <meta charset="UTF-8">
     <title>info_user</title>
     <style>
-        /* Здесь могут быть ваши стили */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa; /* Цвет основного фона */
+            margin: 0;
+            padding: 20px; /* Добавим отступы для контента */
+            position: relative; /* Относительное позиционирование для абсолютного позиционирования кнопки */
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 32px; /* Увеличим размер заголовка */
+            color: #007bff; /* Цвет заголовка */
+            margin-bottom: 20px; /* Отступ снизу */
+        }
+
+        p {
+            font-size: 18px; /* Размер текста */
+            color: #555; /* Цвет текста */
+            line-height: 1.6; /* Межстрочный интервал */
+            margin-bottom: 10px; /* Отступ снизу */
+            padding: 8px; /* Поля вокруг текста */
+            background-color: #f0f0f0; /* Фоновый цвет */
+            border-radius: 5px; /* Закругленные углы */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Тень */
+        }
+
+        .booking-info {
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            color: #ffffff;
+            background-color: #007bff; /* Цвет кнопок */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Цвет кнопок при наведении */
+        }
+
+        .top-right {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007bff; /* Цвет кнопок */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3; /* Цвет кнопок при наведении */
+        }
     </style>
 </head>
 <body>
 
-{{ request.user.username }}<br>
-{% if hotels %}
-    {% for booking, hotel in hotels %}
-        
-        {{ hotel.name }}<br>
-        {{ booking.date_add }}<br>
-        
-        {{ booking.check_in_date }}<br>
-        {{ booking.eviction_date }}<br>
-        {{ booking.room_pay.number }}<br>
-        {{ booking.room_pay.room_price }}<br>
-        {{ booking.room_pay.room_type }}<br><br>
-        <a href="{% url 'del_booking' booking.id %}">
-            <button type="submit" value="Снять бронь" >Снять бронь </button></a><br><br>
-    {% endfor %}
-    
-{% endif %}
+<a href="{% url 'home' %}" class="button top-right">Главная</a>
+
+<div class="content">
+    <h1>Информация о пользователе</h1>
+    <h2><p>Имя пользователя: {{ request.user.username }}</p></h2>
+    {% if hotels %}
+        {% for booking, hotel in hotels %}
+            <div class="booking-info">
+                <p>Название отеля: {{ hotel.name }}</p>
+                <p>Дата добавления брони: {{ booking.date_add }}</p>
+                <p>Дата заезда: {{ booking.check_in_date }}</p>
+                <p>Дата выселения: {{ booking.eviction_date }}</p>
+                <p>Номер комнаты: {{ booking.room_pay.number }}</p>
+                <p>Цена комнаты: {{ booking.room_pay.room_price }}</p>
+                <p>Тип комнаты: {{ booking.room_pay.room_type }}</p>
+                <a href="{% url 'del_booking' booking.id %}">
+                    <input type="submit" value="Снять бронь">
+                </a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Нет забронированных отелей</p>
+    {% endif %}
+</div>
 
 </body>
 </html>
+

@@ -3,20 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    
-     
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa; /* Цвет основного фона */
+            margin: 0;
+            padding: 20px; /* Добавим отступы для контента */
+            position: relative; /* Относительное позиционирование для абсолютного позиционирования кнопки */
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 32px; /* Увеличим размер заголовка */
+            color: #007bff; /* Цвет заголовка */
+            margin-bottom: 20px; /* Отступ снизу */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form p {
+            font-size: 18px; /* Размер текста */
+            color: #555; /* Цвет текста */
+            line-height: 1.6; /* Межстрочный интервал */
+            margin-bottom: 10px; /* Отступ снизу */
+            padding: 8px; /* Поля вокруг текста */
+            background-color: #f0f0f0; /* Фоновый цвет */
+            border-radius: 5px; /* Закругленные углы */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Тень */
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            color: #ffffff;
+            background-color: #007bff; /* Цвет кнопок */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            align-self: flex-start; /* Выравнивание кнопки в начале формы */
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Цвет кнопок при наведении */
+        }
+
+        .top-right {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007bff; /* Цвет кнопок */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3; /* Цвет кнопок при наведении */
+        }
+    </style>
 </head>
 <body>
 
+<a href="{% url 'home' %}" class="button top-right">Главная</a>
 
-     <form method="post" action="{% url 'book_room' %}">
-         {% csrf_token %}
+<div class="content">
+    <h1>Оформление брони</h1>
+    <form method="post" action="{% url 'book_room' %}">
+        {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Авторизация">
-         
-         
-         
-     </form>
+        <input type="submit" value="Оформить бронь">
+    </form>
+</div>
 
 </body>
 </html>
